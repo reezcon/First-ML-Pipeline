@@ -11,11 +11,23 @@ Managing a website with 30,000 pieces of content, or more, is overwhelming. Ever
 
 Without data, you might guess. You might refresh the oldest content, or the pages you remember writing, or the ones with the fanciest headlines. However, guessing wastes time, which is a critical and finite resource. You might spend a week refreshing a page that no one visits. Or you might miss a high-traffic page that's slowly losing readers. This work solves that problem. The system **ranks all 30,000 pieces by how much they'll benefit from editorial action**. The ranking uses signals we can measure, such as how many people see the page, how many click it, how long it's been since we updated it, and how long the article is. By learning which combinations of signals predict engagement, it can tell the editorial team which 50 pieces have the most potential.
 
-Unit of analysis:
-Output: 
-Action:
-Cost of wrong a wrong call:
-Why ML helps: 
+**Unit of analysis:**
+- One row represents one content piece measured over a trailing 90-day window. 
+- Each content piece has search, content, freshness, and engagement information. 
+
+**Output:**
+- The output is a ranked queue of content pieces, where each piece receives a score and rank. The recommended review size is the top 20–50 pieces.
+
+**Action:**
+- A content team manager uses the ranked queue to decide which pieces should be reviewed first. Possible actions include improving a title or meta description, refreshing outdated content, adding internal links, checking search visibility, or testing a different editorial approach.
+- The ranking supports human decisions; it does not automatically change or delete content.
+
+**Cost of a wrong call:**
+- A **false positive** causes the team to spend time and editorial effort on a piece that has little improvement potential.
+- A **false negative** means the team may miss a high-potential piece, allowing an opportunity for more traffic or engagement to go unused. 
+
+**Why ML helps:**
+Engagement is associated with several signals at the same time, including content type, position, freshness, word count, CPC, search volume, and competition. These signals can interact in ways that are difficult to represent with many fixed if-statements. A machine learning model can examine these combinations and produce a consistent ranking across thousands of content pieces. In this project, the **Random Forest model** is also useful for exploring which signals are associated with engagement. 
 
 ## 2. Data safety
 
