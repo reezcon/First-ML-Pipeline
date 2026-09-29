@@ -1,9 +1,9 @@
 # Capstone Report — <your lane>
 
-- **Author:**
-- **Lane:**
-- **Repo:**
-- **Date:**
+- **Author:** Reezcon Vivo
+- **Lane:** Machine Learning
+- **Repo:** https://github.com/reezcon/First-ML-Pipeline.git
+- **Date:** September 2026
 
 ## 1. Problem framing
 
