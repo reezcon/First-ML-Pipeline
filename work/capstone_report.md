@@ -58,8 +58,22 @@ The baseline successfully identifies high-engagement content. It is a fair compa
 
 ## 4. Model / analysis
 
-Your method and why it fits the lane. The exact feature list (and what you left out on
-purpose). The target or proxy definition, in one sentence.
+I chose **Random Forest Regressor** as it handles mixed data types (categorical and numeric) natively, is robust to missing values (learns to branch on missingness), produces interpretable feature importance scores, and trains quickly.
+
+**Preprocessing**: Categorical features filled missing with "MISSING". Numeric features filled missing with median. No scaling, transformations, or feature engineering.
+
+**Exact feature list** (seven features after preprocessing):
+1. content_type (keyword article, feedly article, comparison article, MISSING)
+2. position_tier (top_3, page_1, striking, page_3_5, deep, MISSING)
+3. freshness_tier (0-30, 31-90, 91-180, 181+, MISSING)
+4. word_count (median-filled numeric)
+5. competition_level (LOW, MEDIUM, HIGH, MISSING)
+6. cpc (median-filled numeric)
+7. search_volume (median-filled numeric)
+
+**Excluded on purpose**: trend_direction, trend_pct (leakage), impressions_90d, clicks_90d, sessions_90d (intermediate metrics), impressions_last_30d, clicks_last_30d (temporal leakage), ai_traffic_pct, scroll_rate (derived from engagement).
+
+**Target**: engagement_rate, a continuous metric from 0-100 = (engaged_sessions_90d / total_sessions_90d) × 100, observed from data.
 
 ## 5. Evaluation
 
