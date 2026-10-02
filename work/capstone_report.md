@@ -108,15 +108,16 @@ Our confidence is highest for the first three tiers because they are backed by s
 
 ## 8. Reproducibility
 
-The exact commands to re-run everything from a fresh clone, your random seeds, and your
-environment (`pip freeze` highlights or `requirements.txt` deltas).
+1. Clone the repository.
+2. Install the required Python packages.
+3. Accept the Hugging Face dataset gate and create a read-only token.
+4. Run the notebooks in order: research question, ML task framing, data contract, baseline score, model training, signal audit, and action playbook.
+5. Re-run the final outputs and check the generated files.
 
----
+Required Python packages: pandas, scikit-learn, numpy, and matplotlib.
 
-> **Claims checklist before submitting:** observed / measured / directional / decision-support
-> **Metrics vs. base rate:** report your task's base rate (majority-class %) next to any
-> precision@K or accuracy — a high score can just be a high base rate. AUC / lift over
-> baseline are the honest discrimination numbers.
-> language everywhere · no causal claims without an experiment or causal design · no
+The key random seed for all model and split steps is 42. This means the train/test split and Random Forest model can be reproduced consistently. 
+
+
 > "predicted Google's algorithm" · no client-identifying details · numbers in this report
 > match a fresh re-run.
