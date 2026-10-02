@@ -119,5 +119,3 @@ Required Python packages: pandas, scikit-learn, numpy, and matplotlib.
 The key random seed for all model and split steps is 42. This means the train/test split and Random Forest model can be reproduced consistently. 
 
 
-> "predicted Google's algorithm" · no client-identifying details · numbers in this report
-> match a fresh re-run.
