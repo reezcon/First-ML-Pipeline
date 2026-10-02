@@ -36,9 +36,9 @@ Access the dataset here: https://huggingface.co/datasets/FlyRank/internship-ware
 
 We used exactly **seven features** to predict engagement: content_type (the format of the piece, such as keyword article, feedly article, or comparison article), position_tier (where the piece ranks in Google search results, such as top 3, page 1, or page 3-5), freshness_tier (how recently the piece was updated, measured in days since last update and binned into categories: 0-30 days, 31-90 days, 91-180 days, or 181+ days), word_count (the number of words in the article), competition_level (whether the target keyword has low, medium, or high competition), cpc (the cost per click in dollars for the target keyword), and search_volume (the estimated monthly search volume for the keyword). These seven features are sufficient to capture the signal structure without requiring proprietary or sensitive data.
 
-Several columns were **deliberately excluded** because although they seemed helpful, they contained what we call "leakage"—information derived from the label we are trying to predict, which would artificially inflate model performance. Most importantly, I excluded trend_direction and trend_pct. The trend_direction column indicates whether engagement is trending up, down, or stable; trend_pct measures the percentage change in engagement over time. Both of these are computed *from* engagement_rate itself, so using them to predict engagement_rate would be circular reasoning. I also excluded intermediate metrics such as impressions_90d, clicks_90d, and sessions_90d. While these are real measurements, engagement_rate is calculated directly from these numbers (engaged_sessions / total_sessions × 100), so including both would be double-counting the same signal.
+Several columns were **deliberately excluded** because although they seemed helpful, they contained what we call "leakage"—information derived from the label we are trying to predict, which would artificially inflate model performance. Most importantly, we excluded trend_direction and trend_pct. The trend_direction column indicates whether engagement is trending up, down, or stable; trend_pct measures the percentage change in engagement over time. Both of these are computed *from* engagement_rate itself, so using them to predict engagement_rate would be circular reasoning. We also excluded intermediate metrics such as impressions_90d, clicks_90d, and sessions_90d. While these are real measurements, engagement_rate is calculated directly from these numbers (engaged_sessions / total_sessions × 100), so including both would be double-counting the same signal.
 
-i took several **precautions against other forms of leakage**. I never used impressions_last_30d, clicks_last_30d, or sessions_last_30d because these overlap with the 90-day label window and create leakage. I also excluded ai_traffic_pct and scroll_rate because these are derived from engagement and would indirectly leak label information. I confirmed that content_id and client_id are used only for grouping and train-test splitting, never as input features to the model. No personal or client-identifying information appears anywhere in the work/ directory; all outputs contain only pseudonymous IDs and aggregate metrics.
+We took several **precautions against other forms of leakage**. We never used impressions_last_30d, clicks_last_30d, or sessions_last_30d because these overlap with the 90-day label window and create leakage. We also excluded ai_traffic_pct and scroll_rate because these are derived from engagement and would indirectly leak label information. We confirmed that content_id and client_id are used only for grouping and train-test splitting, never as input features to the model. No personal or client-identifying information appears anywhere in the work/ directory; all outputs contain only pseudonymous IDs and aggregate metrics.
 
 The dataset has one important structural limitation: it is a single 90-day snapshot. All 30,000 content pieces are measured over the same time window, so we cannot observe seasonal effects, algorithm updates, or long-term trends. Additionally, the dataset only includes content that has accumulated traffic (either from search, internal links, or prior promotion). New, unpublished, or unlinked content is invisible. This creates survivor bias: we are only learning from content that has already "survived" enough to get measured. Finally, while we can observe that certain signals correlate with engagement, we cannot prove causation. For example, longer articles correlate with higher engagement, but we do not know whether writing longer articles *causes* higher engagement, or whether better-written articles simply tend to be longer, or whether longer articles naturally target broader topics with more reader interest. This distinction matters for how actionable our recommendations are.
 
@@ -77,8 +77,19 @@ I chose **Random Forest Regressor** as it handles mixed data types (categorical 
 
 ## 5. Evaluation
 
-Your split (grouped by client? time-aware?) and why. Metrics, model vs baseline **on the same
-split**. What the errors look like — a short error analysis beats a big metric table.
+We used a grouped-by-client split rather than a random split because clients differ in content strategy, SEO maturity, and editorial practices. Randomly splitting the data would allow the model to learn client-specific patterns that do not generalize to new clients. A grouped split is therefore more honest for the problem. We used 80% of clients for training and 20% for testing, resulting in 23,837 training rows and 6,163 test rows. All comparisons below are on the same split.
+
+The baseline and model were evaluated using the same metric: mean engagement_rate in the top-K ranked pieces. The results are:
+
+- Baseline top-20: 2.3415
+- Model top-20: 0.3780
+- Baseline top-50: 2.9996
+- Model top-50: 1.5798
+- Baseline top-100: 3.6169
+- Model top-100: 2.5390
+
+The key result is that the baseline outperformed the model at all three evaluation cutoffs. The model did not beat the baseline on this honest split. The error pattern is informative: the model underperforms at the top-20 because it is more sensitive to sparse or noisy traffic patterns, whereas the baseline is more stable on high-impression pages. As we move to the top-50 and top-100, the model starts to recover, but it still does not surpass the transparent rule. This suggests that, for the current task and data, the baseline is the stronger ranking method for immediate editorial action.
+
 
 ## 6. Interpretation
 
