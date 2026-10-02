@@ -90,11 +90,13 @@ The baseline and model were evaluated using the same metric: mean engagement_rat
 
 The key result is that the baseline outperformed the model at all three evaluation cutoffs. The model did not beat the baseline on this honest split. The error pattern is informative: the model underperforms at the top-20 because it is more sensitive to sparse or noisy traffic patterns, whereas the baseline is more stable on high-impression pages. As we move to the top-50 and top-100, the model starts to recover, but it still does not surpass the transparent rule. This suggests that, for the current task and data, the baseline is the stronger ranking method for immediate editorial action.
 
-
 ## 6. Interpretation
 
-What the model/clusters actually found. Feature importances or cluster profiles in plain
-words. Surprises and negative results — a well-understood "no effect" is a valid result.
+The model’s feature importance scores show that word_count is by far the most important signal, accounting for about 61.7% of the model’s predictive value. This suggests that longer pieces are much more likely to be associated with higher engagement than other features in the dataset. The next most important factors were cpc and search_volume, which together explain much of the remaining signal. In plain language, the model is learning that high-value, high-demand content tends to be more engaging, and that longer articles are also strongly associated with better engagement.
+
+This is a useful but cautious interpretation. We do not know whether longer content causes higher engagement, or whether longer content is simply a proxy for better topic coverage, stronger editorial effort, or better search visibility. The same caution applies to CPC and search_volume: these features likely capture keyword value and audience demand, not necessarily a direct causal effect on engagement. A well-understood “no effect” result is also valid here: the model did not find strong predictive power in some variables we expected to matter, such as freshness_tier and competition_level. These features are weaker than we might have expected.
+
+One important **surprise** is that position_tier, which seems highly relevant in search marketing, was not the dominant predictor here. This likely reflects overlapping signals: the content that ranks well is also the content that is more comprehensive, better targeted, and more heavily supported by search demand. In other words, position is not independent of the other features. Another explanation is that the same high-visibility pages have already accumulated traffic and engagement in ways that make position less informative once other signals are included. This is an important reminder that the model is showing association, not causation.
 
 ## 7. Recommendation
 
