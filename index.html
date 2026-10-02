@@ -3,47 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capstone Report — Machine Learning</title>
+    <title>Capstone Report | Machine Learning</title>
     <style>
       :root {
-        --bg: #f4f7fb;
+        --bg: #f5f7fa;
         --panel: #ffffff;
-        --panel-alt: #eef4ff;
-        --ink: #17212d;
-        --muted: #5d6d7d;
-        --line: #dfe7f2;
-        --primary: #2357d9;
-        --primary-dark: #193f9d;
-        --accent: #eaf2ff;
-        --success: #1d7a5d;
-        --warning: #b85c00;
-        --shadow: 0 12px 30px rgba(21, 35, 58, 0.08);
+        --paper: #f8f9fb;
+        --ink: #1a2433;
+        --muted: #5d6774;
+        --line: #e5eaf1;
+        --primary: #1f4f9d;
+        --primary-soft: #edf3ff;
+        --accent: #dfeafc;
+        --warning: #8a5a17;
+        --warning-soft: #fff4df;
       }
 
       * { box-sizing: border-box; }
-
       html { scroll-behavior: smooth; }
-
       body {
         margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Arial, sans-serif;
         background: var(--bg);
         color: var(--ink);
         line-height: 1.7;
       }
 
       .container {
-        width: min(1120px, calc(100% - 32px));
+        max-width: 980px;
         margin: 0 auto;
+        padding: 0 24px;
       }
 
       header {
+        background: rgba(255,255,255,0.9);
+        border-bottom: 1px solid var(--line);
         position: sticky;
         top: 0;
-        z-index: 10;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(8px);
-        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(6px);
+        z-index: 50;
       }
 
       .topbar {
@@ -62,83 +60,83 @@
       nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 14px;
+        gap: 16px;
       }
 
       nav a {
         color: var(--ink);
         text-decoration: none;
-        font-size: 0.96rem;
+        font-size: 0.95rem;
         opacity: 0.8;
       }
 
       nav a:hover { opacity: 1; }
 
       main {
-        padding: 32px 0 64px;
+        padding: 38px 0 60px;
       }
 
       .hero {
-        background: linear-gradient(180deg, var(--panel-alt), var(--panel));
+        background: var(--panel);
         border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-        padding: 32px 28px;
+        padding: 32px 30px;
+        border-radius: 16px;
         margin-bottom: 28px;
       }
 
       .eyebrow {
         display: inline-block;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: var(--accent);
-        color: var(--primary-dark);
-        font-weight: 700;
-        font-size: 0.82rem;
-        letter-spacing: 0.04em;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
+        font-weight: 700;
+        color: var(--primary);
+        background: var(--primary-soft);
+        border-radius: 999px;
+        padding: 7px 12px;
       }
 
       h1 {
-        font-size: clamp(2.2rem, 4vw, 3.4rem);
-        line-height: 1.1;
-        margin: 18px 0 12px;
+        font-size: clamp(2.2rem, 5vw, 3.3rem);
+        line-height: 1.15;
+        margin: 18px 0 10px;
+        letter-spacing: -0.04em;
       }
 
       .meta {
         display: flex;
         flex-wrap: wrap;
         gap: 18px;
-        font-size: 0.98rem;
         color: var(--muted);
-        margin-top: 12px;
+        font-size: 0.96rem;
+        margin-top: 8px;
       }
 
       .summary {
         margin-top: 18px;
-        font-size: 1.08rem;
         max-width: 70ch;
+        font-size: 1.04rem;
       }
 
       section {
-        margin-top: 30px;
         background: var(--panel);
         border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-        padding: 28px 28px 20px;
+        border-radius: 16px;
+        padding: 28px 30px;
+        margin-top: 24px;
       }
 
       h2 {
-        margin-top: 0;
         font-size: clamp(1.5rem, 2vw, 2rem);
-        border-bottom: 2px solid var(--accent);
-        padding-bottom: 10px;
+        line-height: 1.25;
+        margin: 0 0 14px;
+        letter-spacing: -0.02em;
       }
 
       h3 {
-        margin-top: 0;
-        font-size: 1.14rem;
+        margin-top: 18px;
+        margin-bottom: 8px;
+        font-size: 1.08rem;
       }
 
       p, li {
@@ -146,78 +144,52 @@
       }
 
       ul, ol {
-        padding-left: 1.3rem;
+        padding-left: 1.25rem;
       }
 
-      .facts {
+      .two-col {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 16px;
-        margin-top: 18px;
+        margin-top: 16px;
       }
 
-      .fact {
-        background: var(--panel-alt);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 18px 16px;
-      }
-
-      .fact strong {
-        display: block;
-        font-size: 0.8rem;
-        color: var(--muted);
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-      }
-
-      .metric-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin-top: 18px;
-      }
-
-      .metric {
-        background: #f8fafc;
+      .stat {
+        background: var(--paper);
         border: 1px solid var(--line);
         border-radius: 12px;
         padding: 16px;
       }
 
-      .metric .value {
+      .stat strong {
         display: block;
-        font-size: 1.55rem;
-        font-weight: 800;
-        color: var(--primary-dark);
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .stat .big {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1.2;
       }
 
       .callout {
-        margin-top: 18px;
-        background: #fff7eb;
-        border-left: 5px solid var(--warning);
+        margin-top: 20px;
+        background: var(--warning-soft);
+        border-left: 4px solid #d89a2f;
         border-radius: 10px;
-        padding: 16px 18px;
-        color: #4d2d14;
-      }
-
-      .feature-list {
-        margin-top: 16px;
-        padding-left: 1.2rem;
-      }
-
-      .small {
-        color: var(--muted);
-        font-style: italic;
+        padding: 14px 16px;
+        color: var(--warning);
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 10px;
-        overflow: hidden;
-        border-radius: 12px;
+        margin-top: 12px;
         background: #fff;
       }
 
@@ -229,25 +201,35 @@
       }
 
       th {
-        background: var(--panel-alt);
+        background: var(--paper);
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      a {
+        color: var(--primary);
       }
 
       .footer {
-        text-align: center;
+        padding: 24px 0 40px;
         color: var(--muted);
-        padding: 24px 0 52px;
+        text-align: center;
+        font-size: 0.96rem;
       }
 
       @media (max-width: 680px) {
         .topbar {
           flex-direction: column;
+          align-items: flex-start;
           justify-content: center;
-          padding: 12px 0;
+          padding: 14px 0;
         }
 
         .hero, section {
-          padding-left: 18px;
-          padding-right: 18px;
+          padding: 22px 18px;
         }
       }
     </style>
@@ -258,7 +240,7 @@
         <div class="brand">FlyRank | Capstone Report</div>
         <nav>
           <a href="#problem">Problem</a>
-          <a href="#data">Data Safety</a>
+          <a href="#data">Data</a>
           <a href="#baseline">Baseline</a>
           <a href="#model">Model</a>
           <a href="#evaluation">Evaluation</a>
@@ -270,148 +252,97 @@
     <main class="container">
       <div class="hero">
         <div class="eyebrow">Machine Learning</div>
-        <h1>Capstone Report — Machine Learning</h1>
+        <h1>Capstone Report</h1>
         <div class="meta">
           <span><strong>Author:</strong> Reezcon Vivo</span>
-          <span><strong>Repo:</strong> First-ML-Pipeline</span>
+          <span><strong>Lane:</strong> Machine Learning</span>
           <span><strong>Date:</strong> September 2026</span>
         </div>
         <p class="summary">
-          Managing a website with more than 30,000 content pieces is difficult without a disciplined
-          prioritization strategy. This project explores whether a machine learning model can help a
-          content team identify the pieces most likely to improve engagement, while respecting data
-          quality, leakage controls, and realistic editorial decision-making.
+          This project evaluates whether a machine learning model can help a content team prioritize the pages most likely to improve engagement, while remaining grounded in realistic business constraints, honest evaluation, and safe data practices.
         </p>
       </div>
 
       <section id="problem">
         <h2>1. Problem framing</h2>
         <p>
-          A large content catalog often contains a mix of pages with strong performance and pages that
-          are visible but underperforming. Without data, teams often make subjective decisions: fixing
-          the oldest pages, the ones they remember writing, or the ones with the most attention-grabbing
-          headlines. These heuristics waste time and may miss the content with the highest improvement
-          potential.
+          Large content libraries include pages with strong performance and pages that receive traffic but fail to convert interest into engagement. Without a data-driven queue, teams often choose pages based on recency, memory, or intuition. That creates wasted effort and missed opportunities.
         </p>
 
-        <div class="facts">
-          <div class="fact">
+        <div class="two-col">
+          <div class="stat">
             <strong>Unit of analysis</strong>
-            One row represents one content piece measured over a trailing 90-day window.
+            <div>One content piece measured over a rolling 90-day window.</div>
           </div>
-          <div class="fact">
+          <div class="stat">
             <strong>Output</strong>
-            A ranked queue of content pieces with a score and rank for prioritization.
+            <div>A ranked list of content pieces with scores and ordering.</div>
           </div>
-          <div class="fact">
+          <div class="stat">
             <strong>Action</strong>
-            A content manager reviews the top-ranked items and decides whether to improve titles,
-            refresh content, or improve SEO structure.
+            <div>Editorial teams review top-ranked pages and decide what to improve.</div>
+          </div>
+          <div class="stat">
+            <strong>Risk</strong>
+            <div>False positives waste effort; false negatives miss hidden opportunities.</div>
           </div>
         </div>
 
         <div class="callout">
-          <strong>Cost of a wrong call:</strong> a false positive wastes editorial time; a false
-          negative means a high-potential opportunity may remain unaddressed.
+          The goal is not to auto-edit content, but to support better human decisions with a ranked queue that highlights the strongest opportunities.
         </div>
-
-        <p>
-          Machine learning helps because engagement is influenced by multiple signals at the same time,
-          including content type, position, freshness, word count, CPC, search volume, and
-          competition. These variables interact in complex ways, making a data-driven ranking tool
-          more useful than a single-rule heuristic.
-        </p>
       </section>
 
       <section id="data">
         <h2>2. Data safety</h2>
         <p>
-          The analysis uses the <strong>FlyRank internship warehouse</strong>, a real-world dataset of
-          30,000 content pieces collected over a single 90-day period and hosted on Hugging Face.
-          Access is available here:
-          <a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank" rel="noreferrer">https://huggingface.co/datasets/FlyRank/internship-warehouse</a>.
-          Client and content identifiers are pseudonymous, protecting real names and domains.
+          The analysis draws from the FlyRank internship warehouse, a real-world dataset of 30,000 content pieces collected over a single 90-day period and hosted on Hugging Face. The dataset is pseudonymous and contains no direct identifiers like author names or domains.
         </p>
-
         <p>
-          We used exactly seven features to predict engagement:
+          We used exactly seven features to predict engagement: content type, position tier, freshness tier, word count, competition level, CPC, and search volume. Several columns were intentionally excluded because they represented leakage, including variables derived from the target or overlapping with the label window.
         </p>
-        <ol class="feature-list">
-          <li>content_type</li>
-          <li>position_tier</li>
-          <li>freshness_tier</li>
-          <li>word_count</li>
-          <li>competition_level</li>
-          <li>cpc</li>
-          <li>search_volume</li>
-        </ol>
-
         <p>
-          Several columns were intentionally excluded because they represented leakage, including
-          information derived from the label itself, or metrics that overlapped with the 90-day target
-          window. We also avoided two common forms of leakage: using future or overlapping engagement
-          variables and using attributes vulnerable to target contamination.
-        </p>
-
-        <p>
-          The dataset also has an important structural limitation: it is a single 90-day snapshot.
-          That means the analysis cannot capture full seasonal trends or longer-term content dynamics.
+          This is a single 90-day snapshot, which means the analysis is limited to that time window and does not capture longer-term seasonal effects.
         </p>
       </section>
 
       <section id="baseline">
         <h2>3. Baseline</h2>
         <p>
-          Before model development, we built a simple baseline rule intended to be understandable to a
-          human content team. It flags content with high impressions and poor engagement signals.
-        </p>
-        <p>
-          The baseline score was encoded as:
-          <strong>baseline_score = 3×(high_impr) + 2×(med_impr) + 2×(low_ctr) + 2×(poor_position) + 1×(missing_position)</strong>
-          with thresholds for high impressions, medium impressions, low CTR, and poor position.
+          Before building a model, we created a transparent baseline rule based on impressions, CTR, and position quality. It was designed to be simple enough for a human team to understand and explain.
         </p>
 
-        <div class="metric-grid">
-          <div class="metric">
-            <span class="value">2.3415</span>
-            Baseline top-20 mean engagement
+        <div class="two-col">
+          <div class="stat">
+            <strong>Top 20</strong>
+            <div class="big">2.3415</div>
           </div>
-          <div class="metric">
-            <span class="value">2.9996</span>
-            Baseline top-50 mean engagement
+          <div class="stat">
+            <strong>Top 50</strong>
+            <div class="big">2.9996</div>
           </div>
-          <div class="metric">
-            <span class="value">3.6169</span>
-            Baseline top-100 mean engagement
+          <div class="stat">
+            <strong>Top 100</strong>
+            <div class="big">3.6169</div>
           </div>
-          <div class="metric">
-            <span class="value">2.91</span>
-            Base rate
+          <div class="stat">
+            <strong>Base rate</strong>
+            <div class="big">2.91</div>
           </div>
         </div>
 
         <p class="small">
-          This is a fair comparison because it uses the same data, metric, and test set as the model,
-          while staying transparent and operationally understandable.
+          The baseline performed well and served as a fair comparator because it used the same data, metric, and test set as the model.
         </p>
       </section>
 
       <section id="model">
         <h2>4. Model / analysis</h2>
         <p>
-          The chosen model was a <strong>Random Forest Regressor</strong>, selected for its ability to
-          work well with mixed categorical and numeric data, handle missing values, and expose feature
-          importance in a relatively interpretable way.
+          A Random Forest Regressor was selected because it handles mixed data types well, tolerates missing values, and provides interpretable feature importance. The preprocessing workflow was intentionally simple: categorical values were filled with “MISSING,” numeric values with the median, and no scaling or additional feature engineering was applied.
         </p>
 
-        <h3>Preprocessing</h3>
-        <ul>
-          <li>Categorical features were filled with <strong>"MISSING"</strong>.</li>
-          <li>Numeric features were filled with the median.</li>
-          <li>No scaling, transformations, or extra feature engineering were applied.</li>
-        </ul>
-
-        <h3>Exact feature list</h3>
+        <h3>Feature list</h3>
         <ol>
           <li>content_type</li>
           <li>position_tier</li>
@@ -423,40 +354,37 @@
         </ol>
 
         <p>
-          The target variable was <strong>engagement_rate</strong>, a continuous metric from 0 to 100
-          defined as:(engaged_sessions_90d / total_sessions_90d) × 100.
+          The target variable was engagement_rate, measured as (engaged_sessions_90d / total_sessions_90d) × 100.
         </p>
       </section>
 
       <section id="evaluation">
         <h2>5. Evaluation</h2>
         <p>
-          A grouped-by-client split was used rather than a random split because content strategy,
-          editorial maturity, and search performance differ substantially across clients. A random split
-          would allow the model to learn client-specific patterns that overstate performance.
+          A grouped-by-client split was used instead of a random split to reduce optimistic results from client-specific patterns leaking into training. The model and baseline were then evaluated using the same metric: mean engagement in the top-ranked items.
         </p>
 
         <table>
           <thead>
             <tr>
-              <th>Metric</th>
+              <th>Evaluation cutoff</th>
               <th>Baseline</th>
               <th>Model</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Top-20 mean engagement</td>
+              <td>Top 20</td>
               <td>2.3415</td>
               <td>0.3780</td>
             </tr>
             <tr>
-              <td>Top-50 mean engagement</td>
+              <td>Top 50</td>
               <td>2.9996</td>
               <td>1.5798</td>
             </tr>
             <tr>
-              <td>Top-100 mean engagement</td>
+              <td>Top 100</td>
               <td>3.6169</td>
               <td>2.5390</td>
             </tr>
@@ -464,68 +392,33 @@
         </table>
 
         <p>
-          The most important conclusion is that the baseline outperformed the model at every evaluation
-          cutoff. The model was not able to beat the baseline on this honest split, and the error
-          pattern suggests that it systematically under-ranked the most promising pieces.
-        </p>
-      </section>
-
-      <section id="interpretation">
-        <h2>6. Interpretation</h2>
-        <p>
-          Feature importance showed that <strong>word_count</strong> was by far the strongest signal,
-          representing approximately <strong>61.7%</strong> of the model's predictive value. This means
-          longer pieces are associated with higher engagement, though it is still unclear whether
-          longer content causes better engagement or simply correlates with stronger topic coverage and
-          stronger editorial depth.
-        </p>
-
-        <p>
-          An unexpected result was that <strong>position_tier</strong> did not dominate the model,
-          despite its apparent importance in search marketing. This may reflect overlap with other
-          variables such as content quality, competition, and search intent.
+          The key result is that the baseline outperformed the model at all three cutoffs. The model did not beat the baseline on this honest split, and the error pattern suggests that it under-ranked some of the highest-potential pages.
         </p>
       </section>
 
       <section id="recommendation">
-        <h2>7. Recommendation</h2>
+        <h2>6. Recommendation</h2>
         <p>
-          The ranked queue from this analysis supports a practical editorial decision framework. The
-          highest-priority items are those with <strong>high impressions and weak engagement signals</strong>:
-          pieces that receive visibility but fail to convert interest into clicks and engagement.
+          The practical takeaway is not to discard machine learning, but to use it as one input alongside business context. The highest-value editorial actions are likely to occur where content has strong visibility but weak engagement, such as high-impression pages with low CTR.
         </p>
-
         <p>
-          The first tier of action should focus on pages with high impressions and low CTR, where the
-          team should improve titles, meta descriptions, and framing. Confidence is highest in these
-          cases because the traffic signal is strong and the operational fix is concrete.
-        </p>
-
-        <p>
-          Lower-confidence recommendations should be treated as exploratory rather than definitive,
-          because weaker signals can be noisy and highly context-sensitive.
+          The recommended editorial playbook is to prioritize pages with large reach but weak click-through or engagement signals, then improve metadata, framing, and content structure. Confidence is highest for these strong traffic signals, while later-tier recommendations are weaker and more exploratory.
         </p>
       </section>
 
       <section id="reproducibility">
-        <h2>8. Reproducibility</h2>
-        <ol>
-          <li>Clone the repository.</li>
-          <li>Install the required Python packages.</li>
-          <li>Accept the Hugging Face dataset gate and create a read-only token.</li>
-          <li>Run the notebooks in order: research question, ML task framing, data contract, baseline score, model training, signal audit, and action playbook.</li>
-          <li>Re-run the final outputs and verify generated files.</li>
-        </ol>
-
+        <h2>7. Reproducibility</h2>
         <p>
-          The required Python packages are: pandas, scikit-learn, numpy, and matplotlib. The random seed
-          for the model and split is <strong>42</strong>, ensuring reproducible train/test splitting and model training.
+          The project is designed to be reproducible. The repository includes a sequence of notebooks and analytical steps to validate the pipeline, and the model uses a fixed random seed of 42 for consistent split and training behavior.
+        </p>
+        <p>
+          Required libraries include pandas, scikit-learn, numpy, and matplotlib. To reproduce the work, clone the repository, install dependencies, accept the Hugging Face dataset gate, then run the notebooks in order.
         </p>
       </section>
     </main>
 
     <div class="container footer">
-      © 2026 Reezcon Vivo — Capstone Report
+      © 2026 Reezcon Vivo
     </div>
   </body>
 </html>
