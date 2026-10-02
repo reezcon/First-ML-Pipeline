@@ -100,8 +100,11 @@ One important **surprise** is that position_tier, which seems highly relevant in
 
 ## 7. Recommendation
 
-The ranked actions or decisions your output supports, and how a FlyRank editor would use them
-tomorrow. State your confidence and the limits explicitly.
+The ranked queue from this analysis supports a simple editorial playbook. The highest-priority items are those with high impressions and weak engagement signals: content that many people see but few click, or content with strong demand but poor search ranking. In practice, the editorial team would use the queue to identify the top 20–50 items for review each week. A FlyRank editor could then decide whether to refresh the page, rewrite the title, improve the meta description, address poor search ranking, or check whether the page is indexed correctly.
+
+The first recommendation tier is high impressions + low CTR. This indicates that a content piece is visible in search results but fails to attract clicks. The team should focus on clearer titles, stronger meta descriptions, and stronger opening paragraphs. The second tier is high impressions + poor position. These are pages with real demand but weak search visibility, so they should be prioritized for content refreshes and SEO improvements. The third tier is high impressions + missing position, which is usually a diagnostic problem rather than a pure content problem. These pages should be checked for indexing issues, redirects, or Search Console problems. The fourth tier is medium impressions + low CTR, which is similar to the first tier but lower urgency. The final tier is only a fallback queue and should be reviewed manually, not assumed to be valuable.
+
+Our confidence is highest for the first three tiers because they are backed by strong traffic signals and clear operational actions. Confidence is lower for the later tiers because the signals are weaker and the opportunity size is smaller. This is important: our recommendations are decision-support, not automated actions. The model does not replace human judgment, and the system should not automatically rewrite, delete, or redirect content. It should instead guide a content manager toward the most likely opportunities for improvement.
 
 ## 8. Reproducibility
 
